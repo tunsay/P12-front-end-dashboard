@@ -1,0 +1,19 @@
+@import '../../assets/styles/variables.scss';
+
+.container{
+    background: #FBFBFB;
+    border-radius: map-get($radius , element);
+    padding: 2rem 0 1rem 1rem;
+    box-sizing: border-box;
+    width: 100%;
+    &__title{
+        font-weight: $font-w-medium;
+    }
+    &__barKilo{
+        fill: $color-secondary;
+    }
+    &__barCalories{
+        fill: $color-primary;
+    }
+}
+
