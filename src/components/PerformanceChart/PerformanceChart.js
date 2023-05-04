@@ -1,3 +1,7 @@
+/** styles */
+import styles from './PerformanceChart.module.scss'
+/** PropTypes */
+import PropTypes from 'prop-types'
 /** recharts dependencies */
 import {
   RadarChart,
@@ -6,16 +10,18 @@ import {
   Radar,
   ResponsiveContainer,
 } from 'recharts'
-/** styles */
-import styles from './PerformanceChart.module.scss'
-
+/** Componenent */
 import { renderPolarAngleAxis } from './polarAngleAxis'
 
 /**
  * Component displaying the performance chart of the user
  * @component
  * @param {Object} performanceData - Types of Performance Data
- * @param {Array} sessionsData.sessions - Types of Performance.
+ * @param {Array} performanceData.kind - Performance name
+ * @param {Array} performanceData.data - Types of Performance.
+ * @param {Number} performanceData.data.value - Value of the data.
+ * @param {Number} performanceData.kind - Number of the type performance.
+ * @param {Array} kindNameFR - Translate name of each performance name
  * @returns {React.ReactElement} The performance chart
  */
 
@@ -29,6 +35,7 @@ export function PerformanceChart({ performanceData }) {
       'Energie',
       'Cardio',
     ]
+    // Replace each name performance of his name in French
     performanceData.data.forEach((perf, i) => (perf.kindName = kindNameFR[i]))
     console.log(performanceData)
     return (
@@ -56,4 +63,17 @@ export function PerformanceChart({ performanceData }) {
       </div>
     )
   }
+}
+
+PerformanceChart.propTypes = {
+  performanceData: PropTypes.shape({
+    kind: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    data: PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.number.isRequired,
+        kind: PropTypes.number.isRequired,
+      })
+    ).isRequired,
+  }).isRequired,
+  kindNameFR: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 }

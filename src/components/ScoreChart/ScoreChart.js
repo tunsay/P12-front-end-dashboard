@@ -1,13 +1,14 @@
-/** recharts dependencies */
-import { ResponsiveContainer, RadialBarChart, RadialBar } from 'recharts'
 /** styles */
 import styles from './ScoreChart.module.scss'
-import React from 'react'
+/** PropTypes */
+import PropTypes from 'prop-types'
+/** recharts dependencies */
+import { ResponsiveContainer, RadialBarChart, RadialBar } from 'recharts'
 
 /**
  * Component displaying the score chart of the user
  * @component
- * @param {number} score - The score of the user
+ * @param {number} score - The score of the user (0-1)
  * @returns {React.ReactElement} The score chart
  */
 
@@ -58,4 +59,8 @@ export function ScoreChart({ score }) {
       )}
     </div>
   )
+}
+
+ScoreChart.propTypes = {
+  score: PropTypes.number.isRequired,
 }

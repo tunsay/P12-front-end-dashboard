@@ -1,8 +1,10 @@
 /** styles */
 import styles from './ActivityChart.module.scss'
-
+/** PropTypes */
+import PropTypes from 'prop-types'
+/** components */
 import { CustomTooltipActivity } from './CustomTooltipActivity'
-
+/** recharts dependencies */
 import {
   BarChart,
   Bar,
@@ -18,12 +20,17 @@ import {
  * Component displaying the activity chart of the user
  * @param {Object} activityData - Types of Activity Data
  * @param {Array} activityData.sessions - Types of Activity Sessions.
+ * @param {Date} activityData.sessions.day - Number of the day.
+ * @param {Number} activityData.sessions.kilogram - Types of Sessions.
+ * @param {Number} activityData.sessions.calories - Types of Sessions.
+ * @param {Number} data - Id of each activity
  * @component
  * @returns {React.ReactElement} - Return a html for ActivityChart.js
  */
 
 export function ActivityChart({ activityData }) {
   if (activityData) {
+    //add id for put id in the name
     const data = activityData.sessions.map((item, i) => ({
       ...item,
       id: i + 1,
@@ -97,4 +104,17 @@ export function ActivityChart({ activityData }) {
       </div>
     )
   }
+}
+
+ActivityChart.propTypes = {
+  activityData: PropTypes.shape({
+    sessions: PropTypes.arrayOf(
+      PropTypes.shape({
+        day: PropTypes.instanceOf(Date).isRequired,
+        kilogram: PropTypes.number.isRequired,
+        calories: PropTypes.number.isRequired,
+      })
+    ).isRequired,
+  }).isRequired,
+  data: PropTypes.array,
 }

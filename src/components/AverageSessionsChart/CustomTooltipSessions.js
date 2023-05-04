@@ -1,4 +1,7 @@
+/** styles */
 import styles from './CustomTooltipSessions.module.scss'
+/** PropTypes */
+import PropTypes from 'prop-types'
 
 /**
  * displaying the custom Tooltip of Average Sessions Charts
@@ -17,4 +20,9 @@ export const CustomTooltipSessions = ({ active, payload }) => {
     )
   }
   return null
+}
+
+CustomTooltipSessions.propTypes = {
+  active: PropTypes.bool,
+  payload: PropTypes.array,
 }

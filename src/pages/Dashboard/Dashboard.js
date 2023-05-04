@@ -32,10 +32,14 @@ import appleLogo from '../../assets/apple.svg'
 /**
  * Component for rendering the dashboard page
  * @component
- * @returns {React.ReactElement} Dashboard
+ * @returns {React.ReactElement} The dashboard page
+ * @default
  */
 
 function Dashboard() {
+  /**
+
+   */
   /* gets id from url */
   const { id } = useParams()
   /* component states */
@@ -46,6 +50,13 @@ function Dashboard() {
   const [score, setScore] = useState()
   const [keyData, setKeyData] = useState()
 
+  /**
+   * Retrieves data for the dashboard from the server.
+   * @async
+   * @function
+   * @param {number} id - The user ID
+   * @throws {Error} If the data cannot be retrieved from the server
+   */
   useEffect(() => {
     const getData = async (id) => {
       try {
@@ -71,7 +82,10 @@ function Dashboard() {
     getData(id)
   }, [id])
 
-  /* renders the dashboard page if user id exists */
+  /**
+   * Renders the dashboard page if user id exists, otherwise renders an error page.
+   * @returns {React.ReactElement} The dashboard page or an error page
+   */
   //if (id === '15') { // condition to test mock data
   if (user) {
     return (

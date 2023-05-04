@@ -1,5 +1,7 @@
 /** styles */
 import styles from './Card.module.scss'
+/** PropTypes */
+import PropTypes from 'prop-types'
 
 /**
  * Component displaying cards with the user's nutrition data
@@ -32,4 +34,12 @@ export function Card({ value, name, unit, image, color }) {
       </div>
     </div>
   )
+}
+
+Card.propTypes = {
+  value: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  unit: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
 }

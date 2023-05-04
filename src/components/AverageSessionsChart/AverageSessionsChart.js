@@ -1,3 +1,9 @@
+/** styles */
+import styles from './AverageSessionsChart.module.scss'
+/** PropTypes */
+import PropTypes from 'prop-types'
+/** components */
+import { CustomTooltipSessions } from './CustomTooltipSessions'
 /** recharts dependencies */
 import {
   LineChart,
@@ -7,15 +13,14 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts'
-/** styles */
-import styles from './AverageSessionsChart.module.scss'
-/** components */
-import { CustomTooltipSessions } from './CustomTooltipSessions'
 
 /**
  * Component displaying the average sessions chart of the user
  * @param {Object} sessionsData - Types of Sessions Data
  * @param {Array} sessionsData.sessions - Types of Sessions.
+ * @param {Number} sessionsData.sessions.day - Date of the session.
+ * @param {Number} sessionsData.sessions.sessionLength - Number of minute of each session.
+ * @param {Array} dayLetter - Array of the first letter of each day
  * @component
  * @returns {React.ReactElement} - Return a html for AverageSessionsChart.js
  */
@@ -85,4 +90,16 @@ export function AverageSessionsChart({ sessionsData }) {
       </div>
     )
   }
+}
+
+AverageSessionsChart.propTypes = {
+  sessionsData: PropTypes.shape({
+    sessions: PropTypes.arrayOf(
+      PropTypes.shape({
+        sessionLength: PropTypes.number.isRequired,
+        day: PropTypes.number.isRequired,
+      })
+    ).isRequired,
+  }).isRequired,
+  dayLetter: PropTypes.array,
 }

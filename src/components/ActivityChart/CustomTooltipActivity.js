@@ -1,4 +1,7 @@
+/** styles */
 import styles from './CustomTooltipActivity.module.scss'
+/** PropTypes */
+import PropTypes from 'prop-types'
 
 /**
  * displaying the custom Tooltip of Activity Charts
@@ -19,4 +22,9 @@ export const CustomTooltipActivity = ({ active, payload }) => {
   }
 
   return null
+}
+
+CustomTooltipActivity.propTypes = {
+  active: PropTypes.bool,
+  payload: PropTypes.array,
 }
