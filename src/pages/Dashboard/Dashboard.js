@@ -37,9 +37,6 @@ import appleLogo from '../../assets/apple.svg'
  */
 
 function Dashboard() {
-  /**
-
-   */
   /* gets id from url */
   const { id } = useParams()
   /* component states */
