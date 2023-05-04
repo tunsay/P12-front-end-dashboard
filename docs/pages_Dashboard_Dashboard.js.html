@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/Dashboard/Dashboard.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/Dashboard/Dashboard.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import styles from './Dashboard.module.scss'
+//** Api Data */
+import {
+  getUserData,
+  getUserActivity,
+  getUserPerformance,
+  getUserAverageSessions,
+} from '../../services/userData'
+// /** mock data */
+// // import {
+// //   getUserData,
+// //   getUserActivity,
+// //   getUserPerformance,
+// //   getUserAverageSessions,
+// // } from '_mocks_/userData'
+/** Components */
+import { ActivityChart } from 'components/ActivityChart/ActivityChart'
+import { PerformanceChart } from 'components/PerformanceChart/PerformanceChart'
+import { AverageSessionsChart } from 'components/AverageSessionsChart/AverageSessionsChart'
+import { ScoreChart } from 'components/ScoreChart/ScoreChart'
+import { Card } from 'components/Card/Card'
+/** pages */
+import { Error } from 'pages/Error/Error'
+
+import energyLogo from '../../assets/energy.svg'
+import chickenLogo from '../../assets/chicken.svg'
+import cheeseburgerLogo from '../../assets/cheeseburger.svg'
+import appleLogo from '../../assets/apple.svg'
+
+/**
+ * Component for rendering the dashboard page
+ * @component
+ * @returns {React.ReactElement} Dashboard
+ */
+
+function Dashboard() {
+  /* gets id from url */
+  const { id } = useParams()
+  /* component states */
+  const [user, setUser] = useState()
+  const [activity, setActivity] = useState()
+  const [performance, setPerformance] = useState()
+  const [averageSessions, setAverageSessions] = useState()
+  const [score, setScore] = useState()
+  const [keyData, setKeyData] = useState()
+
+  useEffect(() => {
+    const getData = async (id) => {
+      try {
+        const userData = await getUserData(id)
+        setUser(userData)
+        // User 12 and 18 don't use the same score name, 12=todayScore and 18=score
+        if (userData.todayScore) {
+          setScore(userData.todayScore)
+        } else {
+          setScore(userData.score)
+        }
+        setKeyData(userData.keyData)
+        const userActivity = await getUserActivity(id)
+        setActivity(userActivity)
+        const userPerformance = await getUserPerformance(id)
+        setPerformance(userPerformance)
+        const userAverageSessions = await getUserAverageSessions(id)
+        setAverageSessions(userAverageSessions)
+      } catch (err) {
+        console.log('Error:', err)
+      }
+    }
+    getData(id)
+  }, [id])
+
+  /* renders the dashboard page if user id exists */
+  //if (id === '15') { // condition to test mock data
+  if (user) {
+    return (
+      &lt;main className={styles.main}>
+        &lt;section className={styles.dashboard}>
+          &lt;h1 className={styles.dashboard__title}>
+            Bonjour{' '}
+            &lt;span className={styles.dashboard__title__username}>
+              {user?.userInfos.firstName}
+            &lt;/span>
+          &lt;/h1>
+          &lt;p className={styles.dashboard__subtitle}>
+            Félicitations ! Vous avez explosé vos objectifs hier 👏
+          &lt;/p>
+
+          &lt;div className={styles.dashboard__container}>
+            &lt;div className={styles.dashboard__container__left}>
+              &lt;ActivityChart activityData={activity} />
+
+              &lt;div className={styles.dashboard__container__charts}>
+                &lt;AverageSessionsChart sessionsData={averageSessions} />
+                &lt;PerformanceChart performanceData={performance} />
+                &lt;ScoreChart score={score} />
+              &lt;/div>
+            &lt;/div>
+
+            &lt;aside className={styles.dashboard__container__right}>
+              &lt;Card
+                value={keyData.calorieCount}
+                name={'Calories'}
+                unit={'kCal'}
+                image={energyLogo}
+                color={'red'}
+              />
+              &lt;Card
+                value={keyData.proteinCount}
+                name={'Proteines'}
+                unit={'g'}
+                image={chickenLogo}
+                color={'blue'}
+              />
+              &lt;Card
+                value={keyData.carbohydrateCount}
+                name={'Glucides'}
+                unit={'g'}
+                image={appleLogo}
+                color={'yellow'}
+              />
+              &lt;Card
+                value={keyData.lipidCount}
+                name={'Lipides'}
+                unit={'g'}
+                image={cheeseburgerLogo}
+                color={'pink'}
+              />
+            &lt;/aside>
+          &lt;/div>
+        &lt;/section>
+      &lt;/main>
+    )
+    /* renders error page if user id does not exist */
+  } else return &lt;Error />
+}
+
+export default Dashboard
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ActivityChart.html">ActivityChart</a></li><li><a href="AverageSessionsChart.html">AverageSessionsChart</a></li><li><a href="Card.html">Card</a></li><li><a href="Dashboard.html">Dashboard</a></li><li><a href="PerformanceChart.html">PerformanceChart</a></li><li><a href="ScoreChart.html">ScoreChart</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CustomTooltipActivity">CustomTooltipActivity</a></li><li><a href="global.html#CustomTooltipSessions">CustomTooltipSessions</a></li><li><a href="global.html#getUserActivity">getUserActivity</a></li><li><a href="global.html#getUserAverageSessions">getUserAverageSessions</a></li><li><a href="global.html#getUserData">getUserData</a></li><li><a href="global.html#getUserPerformance">getUserPerformance</a></li><li><a href="global.html#renderPolarAngleAxis">renderPolarAngleAxis</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue May 02 2023 00:08:52 GMT+0200 (heure d’été d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
