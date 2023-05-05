@@ -24,5 +24,5 @@ export const CustomTooltipSessions = ({ active, payload }) => {
 
 CustomTooltipSessions.propTypes = {
   active: PropTypes.bool,
-  payload: PropTypes.array,
+  payload: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 }

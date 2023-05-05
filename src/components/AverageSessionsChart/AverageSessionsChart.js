@@ -33,7 +33,6 @@ export function AverageSessionsChart({ sessionsData }) {
     }))
   }
   if (sessionsData) {
-    console.log(sessionsData)
     return (
       <div className={styles.container}>
         <h3 className={styles.container__title}>
@@ -90,16 +89,15 @@ export function AverageSessionsChart({ sessionsData }) {
       </div>
     )
   }
-}
-
-AverageSessionsChart.propTypes = {
-  sessionsData: PropTypes.shape({
-    sessions: PropTypes.arrayOf(
-      PropTypes.shape({
-        sessionLength: PropTypes.number.isRequired,
-        day: PropTypes.number.isRequired,
-      })
-    ).isRequired,
-  }).isRequired,
-  dayLetter: PropTypes.array,
+  AverageSessionsChart.propTypes = {
+    sessionsData: PropTypes.shape({
+      sessions: PropTypes.arrayOf(
+        PropTypes.shape({
+          sessionLength: PropTypes.number.isRequired,
+          day: PropTypes.number.isRequired,
+        })
+      ).isRequired,
+    }),
+    dayLetter: PropTypes.array,
+  }
 }

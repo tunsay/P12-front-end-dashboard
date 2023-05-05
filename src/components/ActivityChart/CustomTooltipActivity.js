@@ -6,12 +6,10 @@ import PropTypes from 'prop-types'
 /**
  * displaying the custom Tooltip of Activity Charts
  * @param {Boolean} active - Types of Active
- * @param {Array} payload - Types of Payload.
+ * @param {Object} payload - Types of Payload.
  */
 
 export const CustomTooltipActivity = ({ active, payload }) => {
-  console.log(active)
-  console.log(payload)
   if (active && payload && payload.length > 0) {
     return (
       <div className={styles.tooltip}>
@@ -26,5 +24,5 @@ export const CustomTooltipActivity = ({ active, payload }) => {
 
 CustomTooltipActivity.propTypes = {
   active: PropTypes.bool,
-  payload: PropTypes.array,
+  payload: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 }

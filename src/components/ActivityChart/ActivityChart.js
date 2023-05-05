@@ -21,8 +21,8 @@ import {
  * @param {Object} activityData - Types of Activity Data
  * @param {Array} activityData.sessions - Types of Activity Sessions.
  * @param {Date} activityData.sessions.day - Number of the day.
- * @param {Number} activityData.sessions.kilogram - Types of Sessions.
- * @param {Number} activityData.sessions.calories - Types of Sessions.
+ * @param {Number} activityData.sessions.kilogram - The value of Kilogram.
+ * @param {Number} activityData.sessions.calories - The value of Calories.
  * @param {Number} data - Id of each activity
  * @component
  * @returns {React.ReactElement} - Return a html for ActivityChart.js
@@ -104,17 +104,16 @@ export function ActivityChart({ activityData }) {
       </div>
     )
   }
-}
-
-ActivityChart.propTypes = {
-  activityData: PropTypes.shape({
-    sessions: PropTypes.arrayOf(
-      PropTypes.shape({
-        day: PropTypes.instanceOf(Date).isRequired,
-        kilogram: PropTypes.number.isRequired,
-        calories: PropTypes.number.isRequired,
-      })
-    ).isRequired,
-  }).isRequired,
-  data: PropTypes.array,
+  ActivityChart.propTypes = {
+    activityData: PropTypes.shape({
+      sessions: PropTypes.arrayOf(
+        PropTypes.shape({
+          day: PropTypes.string.isRequired,
+          kilogram: PropTypes.number.isRequired,
+          calories: PropTypes.number.isRequired,
+        })
+      ).isRequired,
+    }),
+    data: PropTypes.array,
+  }
 }
