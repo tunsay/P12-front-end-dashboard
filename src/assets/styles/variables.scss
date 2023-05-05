@@ -35,3 +35,9 @@ $breakpoints: (
         @content;
     }
 }
+
+@mixin screen-xs {
+    @media screen and (max-width: 1023px) {
+        @content;
+    }
+}
