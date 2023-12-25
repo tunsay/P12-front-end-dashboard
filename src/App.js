@@ -8,9 +8,9 @@ function App() {
   return (
     <React.Fragment>
       <Layout />
-      <BrowserRouter>
+      <BrowserRouter basename="/P12-front-end-dashboard">
         <Routes>
-          <Route path="/" element={<Navigate to="/user/12" />} />
+          <Route path="/" element={<Navigate to="/user/15" />} />
           <Route path="/user/:id" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>

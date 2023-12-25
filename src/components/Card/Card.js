@@ -14,7 +14,8 @@ import PropTypes from 'prop-types'
  * @returns {React.ReactElement} A card component with the user's nutrition data
  */
 
-export function Card({ value, name, unit, image, color }) {
+export function Card({ value }) {
+  const { count, name, unit, image, color } = value
   return (
     <div className={styles.card}>
       <img
@@ -27,7 +28,7 @@ export function Card({ value, name, unit, image, color }) {
       />
       <div className={styles.card__text}>
         <h4 className={styles.card__text__value}>
-          {value}
+          {count}
           {unit}
         </h4>
         <p className={styles.card__text__title}>{name}</p>
